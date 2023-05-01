@@ -17,7 +17,7 @@ app.use(express.static("public"));
 //Create new DB in mongoDB
 main().catch(err => console.log(err));
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect('mongodb+srv://saikrishnamodhupalli1:Sai$12345@cluster0.6p9zs1a.mongodb.net/todolistDB');
 }
 const itemsSchema = {
   name: String
@@ -64,7 +64,7 @@ app.get("/", function (req, res) {
         res.redirect("/")
       }
       else {
-        res.render("list", { listTitle: "Today", newListItems: Litems });
+        res.render("index", { listTitle: "Today", newListItems: Litems });
       }
 
     });
@@ -82,7 +82,7 @@ app.get("/:customListName", function (req, res) {
         list.save();
         res.redirect("/"+customListName);
       }else{
-        res.render("list", { listTitle: foundList.name, newListItems: foundList.items});
+        res.render("index", { listTitle: foundList.name, newListItems: foundList.items});
       }
     });
  
@@ -136,7 +136,7 @@ app.post("/delete", function (req, res) {
  });
 
 app.get("/work", function (req, res) {
-  res.render("list", { listTitle: "Work List", newListItems: workItems });
+  res.render("index", { listTitle: "Work List", newListItems: workItems });
 });
 
 app.get("/about", function (req, res) {
